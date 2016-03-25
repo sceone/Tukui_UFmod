@@ -86,13 +86,6 @@ TukuiUnitFrames.AddClassFeatures["DRUID"] = function(self)
 	EclipseBar.SolarBar:SetStatusBarColor(.80, .82,  .60)
 	EclipseBar.SolarBar:SetFrameLevel(self.Health:GetFrameLevel() + 1)
 	
-	EclipseBar.Text = EclipseBar:CreateFontString(nil, "OVERLAY")
-	EclipseBar.Text:SetPoint("TOP", self.Panel)
-	EclipseBar.Text:SetPoint("BOTTOM", self.Panel)
-	EclipseBar.Text:SetFontObject(Font)
-	
-	EclipseBar.PostUpdatePower = TukuiUnitFrames.EclipseDirection
-	
 	EclipseBar:SetScript("OnShow", TukuiUnitFrames.UpdateDruidClassBars)
 	EclipseBar:SetScript("OnHide", TukuiUnitFrames.UpdateDruidClassBars)
 	

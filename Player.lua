@@ -21,18 +21,15 @@ function TukuiUnitFrames:Player()
 	self:SetBackdropColor(0, 0, 0)
 	self:CreateShadow()
 
-	local Panel = CreateFrame("Frame", nil, self)
-	Panel:SetFrameStrata(self:GetFrameStrata())
-	Panel:SetFrameLevel(2)
-	Panel:SetTemplate()
-	Panel:Size(250, 21)
-	Panel:Point("BOTTOM", self, "BOTTOM", 0, 0)
-	Panel:SetBackdropBorderColor(C["General"].BorderColor[1] * 0.7, C["General"].BorderColor[2] * 0.7, C["General"].BorderColor[3] * 0.7)
+	local Artwork = CreateFrame("Frame", nil, self)
+	Artwork:SetFrameStrata(self:GetFrameStrata())
+	Artwork:SetFrameLevel(10)
+	Artwork:SetAllPoints()
 	
 	local Health = CreateFrame("StatusBar", nil, self)
 	Health:SetFrameStrata(self:GetFrameStrata())
 	Health:SetFrameLevel(4)
-	Health:Height(26)
+	Health:Height(40)
 	Health:SetPoint("TOPLEFT")
 	Health:SetPoint("TOPRIGHT")
 	Health:SetStatusBarTexture(HealthTexture)
@@ -41,9 +38,9 @@ function TukuiUnitFrames:Player()
 	Health.Background:SetAllPoints()
 	Health.Background:SetTexture(.1, .1, .1)
 	
-	Health.Value = Health:CreateFontString(nil, "OVERLAY")
+	Health.Value = Artwork:CreateFontString(nil, "OVERLAY")
 	Health.Value:SetFontObject(Font)
-	Health.Value:Point("RIGHT", Panel, "RIGHT", -4, 0)
+	Health.Value:Point("BOTTOMRIGHT", Health, "BOTTOMRIGHT", -4, 3)
 	
 	Health.PostUpdate = TukuiUnitFrames.PostUpdateHealth
 	Health.frequentUpdates = true
@@ -68,7 +65,7 @@ function TukuiUnitFrames:Player()
 	local Power = CreateFrame("StatusBar", nil, self)
 	Power:SetFrameStrata(self:GetFrameStrata())
 	Power:SetFrameLevel(4)
-	Power:Height(8)
+	Power:Height(16)
 	Power:Point("TOPLEFT", Health, "BOTTOMLEFT", 0, -1)
 	Power:Point("TOPRIGHT", Health, "BOTTOMRIGHT", 0, -1)
 	Power:SetStatusBarTexture(PowerTexture)
@@ -78,9 +75,9 @@ function TukuiUnitFrames:Player()
 	Power.Background:SetTexture(0.1, 0.1, 0.1)
 	Power.Background.multiplier = 0.3
 	
-	Power.Value = Power:CreateFontString(nil, "OVERLAY")
+	Power.Value = Artwork:CreateFontString(nil, "OVERLAY")
 	Power.Value:SetFontObject(Font)
-	Power.Value:Point("LEFT", Panel, "LEFT", 4, 0)
+	Power.Value:Point("BOTTOMLEFT", Health, "BOTTOMLEFT", 4, 3)
 	
 	Power.frequentUpdates = true
 	
@@ -117,31 +114,31 @@ function TukuiUnitFrames:Player()
 		self.Portrait = Portrait
 	end
 	
-	local Combat = Health:CreateTexture(nil, "OVERLAY", 1)
+	local Combat = Artwork:CreateTexture(nil, "OVERLAY", 1)
 	Combat:Size(19, 19)
-	Combat:Point("LEFT", 0, 1)
+	Combat:Point("LEFT", Health, "LEFT", 0, 1)
 	Combat:SetVertexColor(0.69, 0.31, 0.31)
 	
-	local Status = Panel:CreateFontString(nil, "OVERLAY", 1)
+	local Status = Artwork:CreateFontString(nil, "OVERLAY", 1)
 	Status:SetFontObject(Font)
-	Status:Point("CENTER", Panel, "CENTER", 0, 0)
+	Status:Point("CENTER", Health, "CENTER", 0, 0)
 	Status:SetTextColor(0.69, 0.31, 0.31)
 	Status:Hide()
 
-	local Leader = Health:CreateTexture(nil, "OVERLAY", 2)
+	local Leader = Artwork:CreateTexture(nil, "OVERLAY", 2)
 	Leader:Size(14, 14)
-	Leader:Point("TOPLEFT", 2, 8)
+	Leader:Point("TOPLEFT", Health, "TOPLEFT", 2, 8)
 
-	local MasterLooter = Health:CreateTexture(nil, "OVERLAY", 2)
+	local MasterLooter = Artwork:CreateTexture(nil, "OVERLAY", 2)
 	MasterLooter:Size(14, 14)
-	MasterLooter:Point("TOPRIGHT", -2, 8)
+	MasterLooter:Point("TOPRIGHT", Health, "TOPRIGHT", -2, 8)
 
 	if (C.UnitFrames.CastBar) then
 		local CastBar = CreateFrame("StatusBar", "TukuiPlayerCastBar", self)
 		CastBar:SetFrameStrata(self:GetFrameStrata())
 		CastBar:SetStatusBarTexture(CastTexture)
 		CastBar:SetFrameLevel(6)
-		CastBar:SetInside(Panel)
+		CastBar:SetAllPoints(Power)
 
 		CastBar.Background = CastBar:CreateTexture(nil, "BORDER")
 		CastBar.Background:SetAllPoints(CastBar)
@@ -150,13 +147,13 @@ function TukuiUnitFrames:Player()
 
 		CastBar.Time = CastBar:CreateFontString(nil, "OVERLAY")
 		CastBar.Time:SetFontObject(Font)
-		CastBar.Time:Point("RIGHT", Panel, "RIGHT", -4, 0)
+		CastBar.Time:Point("RIGHT", Power, "RIGHT", -4, 0)
 		CastBar.Time:SetTextColor(0.84, 0.75, 0.65)
 		CastBar.Time:SetJustifyH("RIGHT")
 
 		CastBar.Text = CastBar:CreateFontString(nil, "OVERLAY")
 		CastBar.Text:SetFontObject(Font)
-		CastBar.Text:Point("LEFT", Panel, "LEFT", 4, 0)
+		CastBar.Text:Point("LEFT", Power, "LEFT", 4, 0)
 		CastBar.Text:SetTextColor(0.84, 0.75, 0.65)
 		CastBar.Text:SetWidth(166)
 		CastBar.Text:SetJustifyH("LEFT")
@@ -327,9 +324,9 @@ function TukuiUnitFrames:Player()
 		self.Totems = Bar
 	end
 	
-	local RaidIcon = Health:CreateTexture(nil, "OVERLAY", 7)
+	local RaidIcon = Artwork:CreateTexture(nil, "OVERLAY", 7)
 	RaidIcon:SetSize(16, 16)
-	RaidIcon:SetPoint("TOP", self, 0, 8)
+	RaidIcon:SetPoint("TOP", Health, "TOP", self, 0, 8)
 	
 	local Threat = Health:CreateTexture(nil, "OVERLAY")
 	Threat.Override = TukuiUnitFrames.UpdateThreat
@@ -338,7 +335,7 @@ function TukuiUnitFrames:Player()
 	self:HookScript("OnLeave", TukuiUnitFrames.MouseOnPlayer)
 	
 	-- Register with oUF
-	self.Panel = Panel
+	--self.Panel = Panel
 	self.Health = Health
 	self.Health.bg = Health.Background
 	self.Power = Power

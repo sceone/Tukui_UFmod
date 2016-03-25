@@ -19,5 +19,13 @@ function TukuiUnitFrames:UpdateThreat(event, unit)
 		else
 			Panel:SetBackdropBorderColor(C["General"].BorderColor[1] * 0.7, C["General"].BorderColor[2] * 0.7, C["General"].BorderColor[3] * 0.7)
 		end
+	elseif unit == "player" then
+		local Status = UnitThreatSituation(unit)
+		
+		if Status and Status > 0 then
+			self.Shadow:SetBackdropBorderColor(1, 0, 0, 0.8)
+		else
+			self.Shadow:SetBackdropBorderColor(0, 0, 0, 0.8)
+		end
 	end
 end

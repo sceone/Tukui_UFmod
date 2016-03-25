@@ -1,7 +1,7 @@
 ## Interface: 60200
 ## Author: Zrr
 ## Title: |cffff8000Tukui|r |cff4060ffUFmod|r
-## Version: 16.35.1
+## Version: 16.35.2
 ## Notes: Based on Tukui 16.35
 ## RequiredDeps: Tukui
 
