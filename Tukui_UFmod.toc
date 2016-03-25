@@ -1,8 +1,8 @@
 ## Interface: 60200
 ## Author: Zrr
 ## Title: |cffff8000Tukui|r |cff4060ffUFmod|r
-## Version: 16.32.1
-## Notes: Based on Tukui 16.32
+## Version: 16.35.1
+## Notes: Based on Tukui 16.35
 ## RequiredDeps: Tukui
 
 Embeds.xml
